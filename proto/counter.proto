@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package counter;
+
+service Counter {
+  rpc IncrementCounter(Empty) returns (CounterResponse) {};
+  // rpc GetCounterValue(CounterRequest) returns (CounterResponse) {};
+  // rpc PrintCounterValue(CounterRequest) returns (CounterResponse) {};
+}
+
+message CounterRequest {
+  string message = 1;
+}
+
+message CounterResponse {
+  string message = 1;
+}
+
+message CountResponse {
+  int32 count = 1;
+}
+
+message Empty {}
