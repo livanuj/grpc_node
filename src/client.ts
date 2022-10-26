@@ -13,17 +13,17 @@ const client = new grpcObj.counter.Counter(`0.0.0.0:${PORT}`, grpc.credentials.c
 
 switch (process.argv[2]) {
   case 'increment':
-    client.IncrementCounter({}, (err, result) => {
+    client.IncrementCounter({}, (err, response) => {
         if (err) throw err;
-    
-        console.log(result?.message)
+
+        console.log(response?.message)
       })
     break;
   case 'get':
-    client.GetCounterValue({}, (err, result) => {
+    client.GetCounterValue({}, (err, response) => {
       if (err) throw err;
 
-      console.log(result)
+      console.log(response)
     })
     break;
   case 'print':
