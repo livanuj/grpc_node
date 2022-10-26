@@ -9,9 +9,8 @@ type SubtypeConstructor<Constructor extends new (...args: any) => any, Subtype> 
 
 export interface ProtoGrpcType {
   counter: {
-    CountResponse: MessageTypeDefinition
+    Count: MessageTypeDefinition
     Counter: SubtypeConstructor<typeof grpc.Client, _counter_CounterClient> & { service: _counter_CounterDefinition }
-    CounterRequest: MessageTypeDefinition
     CounterResponse: MessageTypeDefinition
     Empty: MessageTypeDefinition
   }

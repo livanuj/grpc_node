@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "proto:gen": "./proto-gen.sh",
-    "server": "ts-node server/index.ts",
-    "client": "ts-node client/index.ts"
+    "server": "ts-node src/server.ts",
+    "client": "ts-node src/client.ts"
   },
   "devDependencies": {
     "@grpc/grpc-js": "^1.7.3",

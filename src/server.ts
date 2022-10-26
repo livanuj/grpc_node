@@ -28,19 +28,23 @@ function main() {
       server.start()
     }
   )
-
 }
 
 function getServer() {
   const server = new grpc.Server()
   server.addService(
     counterPackage.Counter.service, {
-    IncrementCounter: (req, res) => {
-      console.log('i am here')
-      console.log(req.request)
+    IncrementCounter: (_, res) => {
       counter += 1
-      res(null, { message: `Counter incremented!!! ${counter}` })
+      res(null, { message: "Counter incremented!!!" })
     },
+    GetCounterValue: (_,res) => {
+      res(null, { count: counter })
+    },
+    PrintCounterValue: (_, res) => {
+      console.log("Counter value: ", counter)
+      res(null, {})
+    }
 
   } as CounterHandlers)
 
