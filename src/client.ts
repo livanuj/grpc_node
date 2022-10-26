@@ -16,14 +16,14 @@ switch (process.argv[2]) {
     client.IncrementCounter({}, (err, response) => {
         if (err) throw err;
 
-        console.log(response?.message)
+        console.log("Response Message", response?.message)
       })
     break;
   case 'get':
     client.GetCounterValue({}, (err, response) => {
       if (err) throw err;
 
-      console.log(response)
+      console.log("Response JSON: ", response)
     })
     break;
   case 'print':
