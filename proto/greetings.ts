@@ -12,7 +12,6 @@ export interface ProtoGrpcType {
     Greeting: MessageTypeDefinition
     Greetings: SubtypeConstructor<typeof grpc.Client, _greetings_GreetingsClient> & { service: _greetings_GreetingsDefinition }
     Name: MessageTypeDefinition
-    Response: MessageTypeDefinition
   }
 }
 

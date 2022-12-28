@@ -33,30 +33,22 @@ function getServer() {
   const server = new grpc.Server()
   server.addService(
     greetingsPackage.Greetings.service, {
-      GetGreetings: (req, res) => {
-        const params = req.request
+      GetGreetings: (call, callback) => {
+        const params = call.request
         console.log('received params', params)
-        let response, message
-        if (!!params.name) {
+
+        let greeting_message = ""
+        if (params.name) {
           const name = params.name.split(' ')
           const firstName = name.shift() || ''
           const lastName = name.join(' ')
           const greetings = new HelloServiceImpl(firstName, lastName)
 
-          response = {
-            statusCode: 200,
-            message: "Success"
-          }
-          message = greetings.showGreeting()
-        } else {
-          response = {
-            statusCode: 403,
-            message: "Invalid Input name"
-          }
-          message = ""
+          greeting_message = greetings.showGreeting()
         }
-        res(null, { response, message })
-      },
+
+        callback(null, { message: greeting_message })
+      }
   } as GreetingsHandlers)
 
   return server

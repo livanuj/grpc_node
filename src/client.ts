@@ -10,15 +10,10 @@ const packageDef = protoLoader.loadSync(path.resolve(__dirname, PROTO_FILE))
 const grpcObj = (grpc.loadPackageDefinition(packageDef) as unknown) as ProtoGrpcType
 
 const client = new grpcObj.greetings.Greetings(`0.0.0.0:${PORT}`, grpc.credentials.createInsecure())
-const name = process.argv[2] || "Anuj Shrestha"
 
+const name = process.argv[2] || "Anuj Shrestha"
 client.GetGreetings({ name: name }, (err, rsp) => {
   if (err) throw err;
-
-  const response = rsp?.response
-  if (response?.statusCode !== 200) {
-    throw response?.message
-  } 
 
   console.log("Response Message", rsp?.message)
 })
