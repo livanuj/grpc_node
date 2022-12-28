@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package greetings;
+
+service Greetings {
+  rpc GetGreetings(Name) returns (Greeting) {};
+}
+
+message Response {
+  int32 statusCode = 1;
+  string message = 2;
+}
+
+message Greeting {
+  Response response = 1;
+  string message = 2;
+}
+
+message Name {
+  string name = 1;
+}

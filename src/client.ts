@@ -1,38 +1,24 @@
 import path from 'path'
 import * as grpc from '@grpc/grpc-js'
 import * as protoLoader from '@grpc/proto-loader'
-import { ProtoGrpcType } from '../proto/counter'
+import { ProtoGrpcType } from '../proto/greetings'
 
 const PORT = 3030
-const PROTO_FILE = '../proto/counter.proto'
+const PROTO_FILE = '../proto/greetings.proto'
 
 const packageDef = protoLoader.loadSync(path.resolve(__dirname, PROTO_FILE))
 const grpcObj = (grpc.loadPackageDefinition(packageDef) as unknown) as ProtoGrpcType
 
-const client = new grpcObj.counter.Counter(`0.0.0.0:${PORT}`, grpc.credentials.createInsecure())
+const client = new grpcObj.greetings.Greetings(`0.0.0.0:${PORT}`, grpc.credentials.createInsecure())
+const name = process.argv[2] || "Anuj Shrestha"
 
-switch (process.argv[2]) {
-  case 'increment':
-    client.IncrementCounter({}, (err, response) => {
-        if (err) throw err;
+client.GetGreetings({ name: name }, (err, rsp) => {
+  if (err) throw err;
 
-        console.log("Response Message", response?.message)
-      })
-    break;
-  case 'get':
-    client.GetCounterValue({}, (err, response) => {
-      if (err) throw err;
+  const response = rsp?.response
+  if (response?.statusCode !== 200) {
+    throw response?.message
+  } 
 
-      console.log("Response JSON: ", response)
-    })
-    break;
-  case 'print':
-    client.PrintCounterValue({}, (err, resp) => {
-      if (err) throw err;
-      
-    })
-    break;
-  default:
-    console.log("Command NOT Found")
-    break;
-}
+  console.log("Response Message", rsp?.message)
+})
