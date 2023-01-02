@@ -38,5 +38,7 @@ To start the client,
 yarn client "your_name"
 ```
 will sent the your_name value to the server
+
 server will print out the received params
+
 client will print out the greeting message received from the server
