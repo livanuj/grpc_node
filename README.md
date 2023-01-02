@@ -34,25 +34,9 @@ to stop the server press 'ctrl + c'
 ## Clients
 To start the client,
 
-for question (a)
 ```
-yarn client increment
+yarn client "your_name"
 ```
-will increment the counter value in the server. Also sends back acknowledgement to the client which is printed out in the console.
-
-for (b)
-```
-yarn client get
-```
-will get the value of counter from server in JSON and is printed in the client
-
-for (c)
-```
-yarn client print
-```
-prints the present value of counter in the server and responds with nothing to the client.
-
-
-
-
-
+will sent the your_name value to the server
+server will print out the received params
+client will print out the greeting message received from the server
